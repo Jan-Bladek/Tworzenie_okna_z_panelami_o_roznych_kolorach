@@ -1,0 +1,9 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="GlownaAplikacja" type="Application" factoryName="Application">
+    <option name="MAIN_CLASS_NAME" value="GlownaAplikacja" />
+    <module name="Tworzenie_okna_z_panelami_o_roznych_kolorach" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
