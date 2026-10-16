@@ -2,25 +2,22 @@
 
 ## Uruchomienie
 
-Wymagane jest JDK (polecenia `java` i `javac`) oraz aktywna sesja graficzna. W katalogu projektu uruchom:
+Wymagane jest JDK oraz aktywna sesja graficzna. Uruchom z terminala pulpitu:
 
 ```bash
 ./uruchom.sh
 ```
 
-Skrypt kompiluje pliki z `src/` do `build/classes/` i uruchamia aplikację.
+Skrypt kompiluje pliki z `src/` do `build/classes/` i uruchamia aplikację. Wykrywa JDK z `JAVA_HOME`, `~/.jdks/openjdk-27` lub `PATH`.
 
 ## Błąd `HeadlessException` / `No X11 DISPLAY variable was set`
 
-To nie jest błąd układu okna. Proces Javy nie widzi serwera graficznego. Swing na Linuksie potrzebuje X11; na pulpicie Wayland zapewnia go zwykle XWayland. Zmienna `WAYLAND_DISPLAY` sama nie wystarcza.
+Swing wymaga dostępu do X11. Na pulpicie Wayland zapewnia go zwykle XWayland; samo `WAYLAND_DISPLAY` nie wystarcza. Uruchom aplikację w lokalnej sesji graficznej i sprawdź `echo "$DISPLAY"`.
 
-1. Uruchom aplikację w zwykłej, lokalnej sesji pulpitu. Sprawdź w terminalu: `echo "$DISPLAY"`. W sesji graficznej wartość zwykle wygląda jak `:0` albo `:1`.
-2. W IntelliJ IDEA sprawdź **Run → Edit Configurations**: usuń `-Djava.awt.headless=true`, jeśli występuje, i uruchom konfigurację na komputerze z pulpitem. Nie uruchamiaj procesu w środowisku headless ani z odłączonym/nieprzekazanym ekranem.
-3. W sesji Wayland sprawdź, czy zainstalowany i uruchomiony jest XWayland. Sama obecność `WAYLAND_DISPLAY` nie uruchomi Swinga.
-4. Przy SSH użyj przekazywania X11 (`ssh -X` lub `ssh -Y`) i skonfiguruj serwer X11 po stronie klienta. W Dockerze/Flatpaku trzeba osobno przekazać socket X11 i uprawnienia.
+Jeśli IntelliJ IDEA jest zainstalowane jako Flatpak, uruchom `./uruchom.sh` w terminalu pulpitu poza IntelliJ. Flatpak może odciąć proces Java od ciasteczka autoryzacji X11. Samo wpisanie `DISPLAY=:0` nie rozwiązuje autoryzacji.
 
-`uruchom.sh` wypisuje wskazówkę, jeśli `DISPLAY` nie jest ustawione. Aplikacji okienkowej nie da się wyświetlić na maszynie bez serwera graficznego; w takim przypadku potrzebny jest pulpit z XWayland albo prawidłowo skonfigurowane przekazywanie ekranu.
+Przy SSH użyj przekazywania X11 (`ssh -X` lub `ssh -Y`) i skonfiguruj serwer X11 po stronie klienta. W Dockerze trzeba przekazać socket X11 i autoryzację.
 
 ## IntelliJ IDEA
 
-Projekt można również otworzyć w IntelliJ i uruchomić klasę `GlownaAplikacja`. Ustaw JDK projektu na zainstalowane JDK. Uruchomienie z terminala w projekcie (`./uruchom.sh`) pozwala odróżnić problem konfiguracji IDE od problemu sesji graficznej.
+Projekt można też otworzyć w IntelliJ i uruchomić klasę `GlownaAplikacja`. Jeśli pojawia się błąd połączenia z X11, uruchom skrypt z terminala pulpitu: `./uruchom.sh`.
