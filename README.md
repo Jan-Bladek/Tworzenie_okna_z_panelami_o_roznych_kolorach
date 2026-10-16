@@ -5,7 +5,7 @@
 Wymagane jest JDK (polecenia `java` i `javac`) oraz aktywna sesja graficzna. W katalogu projektu uruchom:
 
 ```bash
-bash uruchom.sh
+./uruchom.sh
 ```
 
 Skrypt kompiluje pliki z `src/` do `build/classes/` i uruchamia aplikację.
@@ -23,4 +23,4 @@ To nie jest błąd układu okna. Proces Javy nie widzi serwera graficznego. Swin
 
 ## IntelliJ IDEA
 
-Projekt można również otworzyć w IntelliJ i uruchomić klasę `GlownaAplikacja`. Ustaw JDK projektu na zainstalowane JDK. Uruchomienie z terminala w projekcie (`bash uruchom.sh`) pozwala odróżnić problem konfiguracji IDE od problemu sesji graficznej.
+Projekt można również otworzyć w IntelliJ i uruchomić klasę `GlownaAplikacja`. Ustaw JDK projektu na zainstalowane JDK. Uruchomienie z terminala w projekcie (`./uruchom.sh`) pozwala odróżnić problem konfiguracji IDE od problemu sesji graficznej.
